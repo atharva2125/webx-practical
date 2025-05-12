@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS To-Do App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .done {
+            text-decoration: line-through;
+            color: gray;
+        }
+        input, button {
+            margin: 5px 0;
+            padding: 8px;
+            font-size: 16px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body ng-controller="TodoController">
+
+    <h1>My To-Do List 📝</h1>
+
+    <!-- Input to add a new task -->
+    <input type="text" ng-model="newTask" placeholder="Enter new task...">
+    <button ng-click="addTask()">Add Task</button>
+
+    <br><br>
+
+    <!-- Input to search/filter tasks -->
+    <input type="text" ng-model="searchText" placeholder="Search tasks...">
+
+    <!-- List of tasks -->
+    <ul>
+        <li ng-repeat="task in tasks | filter:searchText">
+            <input type="checkbox" ng-model="task.completed">
+            <span ng-class="{done: task.completed}">
+                {{ task.name }}
+            </span>
+        </li>
+    </ul>
+
+</body>
+
+<script>
+    // Define the AngularJS module
+    angular.module('todoApp', [])
+    
+    // Define the controller
+    .controller('TodoController', function($scope) {
+        
+        // List of tasks
+        $scope.tasks = [];
+
+        // Function to add a new task
+        $scope.addTask = function() {
+            if ($scope.newTask) { // if input is not empty
+                $scope.tasks.push({
+                    name: $scope.newTask,
+                    completed: false
+                });
+                $scope.newTask = ''; // clear the input box
+            }
+        };
+    });
+</script>
+</html>

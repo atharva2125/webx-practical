@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Form Submission</title>
+</head>
+<body>
+    <h1>AJAX Form Submission Example</h1>
+
+    <!-- Form with Name and Email fields -->
+    <form id="userForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="response" style="margin-top: 20px;"></div>
+
+    <script>
+        // Add a submit event listener to the form
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            // Use the Fetch API to send the form data to a dummy server
+            fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: name, email: email }) // Send data as JSON
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse the JSON response
+            })
+            .then(data => {
+                // Display the server response
+                document.getElementById('response').innerHTML = `
+                    <h3>Server Response:</h3>
+                    <p><strong>ID:</strong> ${data.id}</p>
+                    <p><strong>Name:</strong> ${data.name}</p>
+                    <p><strong>Email:</strong> ${data.email}</p>
+                `;
+            })
+            .catch(error => {
+                // Handle errors and display an error message
+                console.error('Error submitting form:', error);
+                document.getElementById('response').innerHTML = '<p style="color:red;">Failed to submit form.</p>';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS MainController Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 5px 0;
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body ng-controller="MainController">
+
+    <h1>AngularJS MainController Example</h1>
+
+    <!-- Input to add a new item -->
+    <input type="text" ng-model="newItem" placeholder="Enter new item...">
+    <button ng-click="addItem()">Add Item</button>
+
+    <br><br>
+
+    <!-- List of items -->
+    <ul>
+        <li ng-repeat="item in items">
+            {{ item }}
+        </li>
+    </ul>
+
+</body>
+
+<script>
+    // Define the AngularJS module
+    angular.module('mainApp', [])
+    
+    // Define the MainController
+    .controller('MainController', function($scope) {
+        
+        // List of items
+        $scope.items = [];
+
+        // Function to add a new item
+        $scope.addItem = function() {
+            if ($scope.newItem) { // if input is not empty
+                $scope.items.push($scope.newItem);
+                $scope.newItem = ''; // clear the input box
+            }
+        };
+    });
+</script>
+</html>

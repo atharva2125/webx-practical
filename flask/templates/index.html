@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask GET and POST UI</title>
+</head>
+<body>
+    <h1>Flask GET and POST Request Tester</h1>
+
+    <!-- Form for GET request -->
+    <h2>GET Request</h2>
+    <form action="/get" method="get">
+        <button type="submit">Send GET Request</button>
+    </form>
+
+    <!-- Form for POST request -->
+    <h2>POST Request</h2>
+    <form action="/post" method="post">
+        <label for="data">Enter JSON Data:</label><br>
+        <textarea id="data" name="data" rows="5" cols="40">{ "key": "value" }</textarea><br><br>
+        <button type="submit">Send POST Request</button>
+    </form>
+</body>
+</html>

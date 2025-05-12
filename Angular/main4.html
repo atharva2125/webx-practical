@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ageApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Age App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        input {
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body ng-controller="AgeController">
+
+    <h1>AngularJS Age App</h1>
+
+    <!-- Input box to take the user's age -->
+    <input type="number" ng-model="userAge" placeholder="Enter your age...">
+
+    <!-- Display the message -->
+    <h2 ng-if="userAge">You are {{ userAge }} years old!</h2>
+
+</body>
+
+<script>
+    // Define the AngularJS module
+    angular.module('ageApp', [])
+    
+    // Define the AgeController
+    .controller('AgeController', function($scope) {
+        // Initialize the userAge variable
+        $scope.userAge = '';
+    });
+</script>
+</html>

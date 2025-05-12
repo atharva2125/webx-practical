@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX JSON Request</title>
+</head>
+<body>
+    <h1>AJAX JSON Request Example</h1>
+    <button id="fetchButton">Fetch JSON Data</button>
+    <div id="result" style="margin-top: 20px;"></div>
+
+    <script>
+        // Add a click event listener to the button
+        document.getElementById('fetchButton').addEventListener('click', function() {
+            // Use the Fetch API to make an AJAX request
+            fetch('https://jsonplaceholder.typicode.com/posts/1') // Example API endpoint
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Parse the JSON response
+                })
+                .then(data => {
+                    // Display the fetched data in the result div
+                    document.getElementById('result').innerHTML = `
+                        <h3>Fetched Data:</h3>
+                        <p><strong>Title:</strong> ${data.title}</p>
+                        <p><strong>Body:</strong> ${data.body}</p>
+                    `;
+                })
+                .catch(error => {
+                    // Handle errors and display an error message
+                    console.error('Error fetching data:', error);
+                    document.getElementById('result').innerHTML = '<p style="color:red;">Failed to fetch data.</p>';
+                });
+        });
+    </script>
+</body>
+</html>

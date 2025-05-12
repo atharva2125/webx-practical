@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="greetingApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Greeting App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        input {
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body ng-controller="GreetingController">
+
+    <h1>AngularJS Greeting App</h1>
+
+    <!-- Input box to take the user's name -->
+    <input type="text" ng-model="userName" placeholder="Enter your name...">
+
+    <!-- Display the greeting -->
+    <h2 ng-if="userName">Hello, {{ userName }}!</h2>
+
+</body>
+
+<script>
+    // Define the AngularJS module
+    angular.module('greetingApp', [])
+    
+    // Define the GreetingController
+    .controller('GreetingController', function($scope) {
+        // Initialize the userName variable
+        $scope.userName = '';
+    });
+</script>
+</html>
